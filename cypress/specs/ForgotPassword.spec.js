@@ -3,6 +3,7 @@ import ForgotPasswordPage from '../pages/ForgotPasswordPage/ForgotPasswordPage.j
 const forgotPasswordPage = new ForgotPasswordPage()
 
 describe('Elements of the Password Page', () => {
+  // This `before` hook opens the forgot password page before running any tests.
   before(() => {
     forgotPasswordPage.openPage()
   })
@@ -21,10 +22,12 @@ describe('Elements of the Password Page', () => {
 })
 
 describe('Functionality of the Password Page', () => {
+  // This `before` hook opens the forgot password page before running any tests.
   before(() => {
     forgotPasswordPage.openPage()
   })
 
+  // This `beforeEach` hook clears the email input field on the login page before each test.
   beforeEach(() => {
     forgotPasswordPage.clearEmailInputField()
   })
@@ -35,12 +38,12 @@ describe('Functionality of the Password Page', () => {
   })
 
   it('should make the error message disappear when user inputs a data in the email field', () => {
-    forgotPasswordPage.typeInEmailField('test')
+    forgotPasswordPage.typeInEmailField(Cypress.env().INCORRECT_DATA_IN_EMAIL_FIELD)
     forgotPasswordPage.errorMessageNotDisplayed()
   })
 
   it('should display an error message when an incorrect email is entered', () => {
-    forgotPasswordPage.typeInEmailField('test@gcom')
+    forgotPasswordPage.typeInEmailField(Cypress.env().INCORRECT_EMAIL)
     forgotPasswordPage.clearEmailInputField()
     forgotPasswordPage.isUsernameErrorMessageDisplayed()
   })
